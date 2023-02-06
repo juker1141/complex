@@ -1,0 +1,16 @@
+sudo: required
+language: generic
+services:
+  - docker
+
+before_install:
+  - docker build -t ryu/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true ryu/react-test npm test
+
+after_success:
+  - docker build -t ryu/multi-client ./client
+  - docker build -t ryu/multi-nginx ./nginx
+  - docker build -t ryu/multi-server ./server
+  - docker build -t ryu/multi-worker ./worker
