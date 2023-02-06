@@ -14,3 +14,10 @@ after_success:
   - docker build -t ryu/multi-nginx ./nginx
   - docker build -t ryu/multi-server ./server
   - docker build -t ryu/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" -- password-stdin
+  # Take those images and push them to docker hub
+  - docker push ryu/multi-client
+  - docker push ryu/multi-nginx
+  - docker push ryu/multi-server
+  - docker push ryu/multi-worker
