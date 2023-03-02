@@ -2,11 +2,12 @@ const keys = require("./keys");
 
 // Express App Setup
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Postgres Client Setup
 const { Pool } = require("pg");
